@@ -2,9 +2,9 @@
 class Elementor_Title_Widget extends \Elementor\Widget_Base {
 
 	public function get_style_depends() {
-		return [ 'style-handle' ];
+		return [ 'title-widget' ];
 	}
-	
+
 
 	public function get_name() {
 		return 'title_widget';

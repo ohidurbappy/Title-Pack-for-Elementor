@@ -1,0 +1,32 @@
+.title-widget-s1{
+	background-color: #e80028;
+	position: relative;
+	color:white !important;
+	text-transform:uppercase;
+	padding: 0 15px 0px 15px;
+	margin: 0 0 15px;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.title-widget-s1:before {
+    content: '';
+    display: inline-block;
+    height: 3px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.title-widget-s1:after {
+	content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-top: 10px solid #a80012;
+    border-right: 10px solid transparent;
+}

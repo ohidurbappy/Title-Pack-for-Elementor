@@ -1,8 +1,8 @@
-?php
+<?php
 /**
  * Plugin Name: Title Pack for Elementor
  * Description: Title pack widgets for elementor with many styles
- * Version:     1.0.0
+ * Version:     0.0.1
  * Author:      Ohidur Rahman Bappy
  * Author URI:  https://www.ohidur.com
  * Text Domain: elementor-addon

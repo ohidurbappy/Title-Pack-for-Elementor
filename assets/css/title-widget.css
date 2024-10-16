@@ -1,7 +1,5 @@
 .title-widget-s1{
-	background-color: #e80028;
 	position: relative;
-	color:white !important;
 	text-transform:uppercase;
 	padding: 0 15px 0px 15px;
 	margin: 0 0 15px;
@@ -27,6 +25,7 @@
     left: 0;
     width: 0;
     height: 0;
-    border-top: 10px solid #a80012;
+    border-top-style: solid;
+    border-top-width: 10px;
     border-right: 10px solid transparent;
 }

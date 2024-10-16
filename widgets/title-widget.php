@@ -95,7 +95,7 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
-		// add background color control
+		// background color control
 		$this->add_control(
 			'title_background_color',
 			[
@@ -104,7 +104,19 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 				'default' => '#e80028',
 				'selectors' => [
 					'{{WRAPPER}} .title-widget-s1' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .title-widget-s1:after' => 'border-top-color:' . $this->darken_color( '{{VALUE}}', 10 ) . ';',
+				],
+			]
+		);
+
+		// bottom arrow color control
+		$this->add_control(
+			'title_arrow_color',
+			[
+				'label' => esc_html__( 'Arrow Color', 'elementor-addon' ),
+				'type' => \Elementor\Controls_Manager::COLOR,
+				'default' => '#a80012',
+				'selectors' => [
+					'{{WRAPPER}} .title-widget-s1:after' => 'border-top-color: {{VALUE}};',
 				],
 			]
 		);
@@ -138,8 +150,12 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 				'label' => esc_html__( 'Font Weight', 'elementor-addon' ),
 				'type' => \Elementor\Controls_Manager::SELECT,
 				'options' => [
+					'200' => esc_html__( '200', 'elementor-addon' ),
+					'300' => esc_html__( '300', 'elementor-addon' ),
+					'400' => esc_html__( '400', 'elementor-addon' ),
 					'normal' => esc_html__( 'Normal', 'elementor-addon' ),
 					'bold' => esc_html__( 'Bold', 'elementor-addon' ),
+
 				],
 				'default' => 'bold',
 				'selectors' => [

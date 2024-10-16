@@ -26,6 +26,26 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 		return [ 'title', 'style' ];
 	}
 
+
+	private function darken_color( $color, $darker=2 ) {
+		$hash = strpos( $color, '#' ) === 0 ? '#' : '';
+		$color = str_replace( '#', '', $color );
+		if ( strlen( $color ) == 6 ) {
+			list( $r, $g, $b ) = str_split( $color, 2 );
+		} elseif ( strlen( $color ) == 3 ) {
+			list( $r, $g, $b ) = str_split( $color, 1 );
+			$r .= $r;
+			$g .= $g;
+			$b .= $b;
+		} else {
+			return false;
+		}
+		$r = dechex( max( 0, min( 255, hexdec( $r ) - $darker ) ) );
+		$g = dechex( max( 0, min( 255, hexdec( $g ) - $darker ) ) );
+		$b = dechex( max( 0, min( 255, hexdec( $b ) - $darker ) ) );
+		return $hash . ( strlen( $r ) < 2 ? '0' : '' ) . $r . ( strlen( $g ) < 2 ? '0' : '' ) . $g . ( strlen( $b ) < 2 ? '0' : '' ) . $b;
+	}
+
 	public function register_controls(){
 
 		// Content Tab Start
@@ -70,7 +90,7 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 				'type' => \Elementor\Controls_Manager::COLOR,
 				'default' => '#ffffff',
 				'selectors' => [
-					'{{WRAPPER}} .title-widget-s1' => 'color: {{VALUE}};',
+					'{{WRAPPER}} .title-widget-s1' => 'color: {{VALUE}} !important;',
 				],
 			]
 		);
@@ -84,7 +104,7 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 				'default' => '#e80028',
 				'selectors' => [
 					'{{WRAPPER}} .title-widget-s1' => 'background-color: {{VALUE}};',
-					'{{WRAPPER}} .title-widget-s1:after' => 'border-top-color: {{VALUE}};',
+					'{{WRAPPER}} .title-widget-s1:after' => 'border-top-color:' . $this->darken_color( '{{VALUE}}', 10 ) . ';',
 				],
 			]
 		);
@@ -128,6 +148,26 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 			]
 		);
 
+		// padding control
+		$this->add_control(
+			'title_padding',
+			[
+				'label' => esc_html__( 'Padding', 'elementor-addon' ),
+				'type' => \Elementor\Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', 'em', '%' ],
+				'default'=> [
+					'top' => 0,
+					'right' => 15,
+					'bottom' => 0,
+					'left' => 15,
+					'unit' => 'px',
+				],
+				'selectors' => [
+					'{{WRAPPER}} .title-widget-s1' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		// html wrapper control
 		$this->add_control(
 			'title_html_tag',
@@ -145,9 +185,9 @@ class Elementor_Title_Widget extends \Elementor\Widget_Base {
 					'div' => esc_html__( 'DIV', 'elementor-addon' ),
 				],
 				'default' => 'h2',
-				// 'selectors' => [
-				// 	'{{WRAPPER}} .title-widget-s1' => 'display: inline-block;',
-				// ],
+				'selectors' => [
+					'{{WRAPPER}} .title-widget-s1' => 'display: inline-block;',
+				],
 			]
 		);
 
